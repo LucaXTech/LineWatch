@@ -13,6 +13,18 @@ It is useful when you need objective evidence for intermittent Internet problems
 
 The project was developed and validated on a **FRITZ!Box 5530 Fiber running FRITZ!OS 8.20**, but the core TR-064 services used by LineWatch (`DeviceInfo` and `WANPPPConnection` / `WANIPConnection`) are common across many FRITZ!Box models.
 
+## Screenshots
+
+### Desktop dashboard
+
+![LineWatch desktop dashboard](docs/screenshots/dashboard-desktop.png)
+
+### Mobile dashboard
+
+<p align="center">
+  <img src="docs/screenshots/dashboard-mobile.png" alt="LineWatch mobile dashboard" width="360">
+</p>
+
 ## Typical use cases
 
 - monitor an Internet connection 24/7 from a Raspberry Pi
