@@ -1,10 +1,32 @@
 # LineWatch
 
-**24/7 connection monitoring and incident logging for FRITZ!Box routers.**
+[![CI](https://github.com/LucaXTech/LineWatch/actions/workflows/ci.yml/badge.svg)](https://github.com/LucaXTech/LineWatch/actions/workflows/ci.yml)
+![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
+![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-tested-c51a4a)
+![Self-hosted](https://img.shields.io/badge/self--hosted-yes-success)
 
-LineWatch turns a Raspberry Pi into a small network black box. It continuously checks the local router, Internet reachability, DNS and HTTP connectivity, while also reading FRITZ!Box data over TR-064 to distinguish a **router reboot** from a **WAN/PPPoE reset** or a more generic Internet outage.
+**Self-hosted Internet connection monitor for Raspberry Pi and FRITZ!Box routers.**
+
+LineWatch turns a Raspberry Pi into a 24/7 **Internet connection monitor**, **network outage monitor** and small diagnostic black box. It continuously checks router reachability, Internet connectivity, latency, DNS and HTTP availability, while reading FRITZ!Box telemetry over TR-064 to distinguish a **router reboot** from a **WAN/PPPoE reset** or a generic ISP outage.
+
+It is useful when you need objective evidence for intermittent Internet problems: random modem reboots, short disconnections, unstable PPPoE sessions, latency spikes, DNS failures or recurring ISP outages that are difficult to reproduce while support is looking at the line.
 
 The project was developed and validated on a **FRITZ!Box 5530 Fiber running FRITZ!OS 8.20**, but the core TR-064 services used by LineWatch (`DeviceInfo` and `WANPPPConnection` / `WANIPConnection`) are common across many FRITZ!Box models.
+
+## Typical use cases
+
+- monitor an Internet connection 24/7 from a Raspberry Pi
+- detect modem/router reboots automatically
+- record Internet outages and total downtime
+- monitor PPPoE disconnects and WAN-session resets
+- measure home-network and ISP latency over time
+- collect evidence before opening an ISP support ticket
+- keep a self-hosted connection uptime monitor on the local network
+- remotely check connection health through a private VPN such as Tailscale
+
+### Italiano
+
+LineWatch serve per **monitorare la connessione Internet 24/7 con Raspberry Pi**, rilevare **riavvii del modem**, **disconnessioni Internet**, reset **PPPoE**, problemi DNS/HTTP, latenza e downtime. Con FRITZ!Box usa TR-064 per capire se è realmente ripartito il router oppure se è caduta soltanto la sessione Internet.
 
 ## What it detects
 
