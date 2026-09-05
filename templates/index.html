@@ -7,46 +7,22 @@
 <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
 <meta name="theme-color" content="#0b1020">
 <style>
-:root{color-scheme:dark;--bg:#0b1020;--card:#151c2e;--muted:#95a1b8;--line:#28334b;--ok:#4bd37b;--bad:#ff6b6b;--warn:#f4bf50;--accent:#6da8ff}
-*{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:#f5f7fb}
-main{max-width:1180px;margin:auto;padding:18px}
-header{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
-h1{font-size:1.5rem;margin:0}.muted{color:var(--muted)}.small{font-size:.85rem}
-.hero{padding:18px;border:1px solid var(--line);border-radius:16px;background:var(--card);margin-bottom:14px}
-.hero strong{font-size:1.3rem}.dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px;background:var(--warn)}
-.dot.ok{background:var(--ok)}.dot.bad{background:var(--bad)}
-.sampleline{margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.sampleline .sep{opacity:.45}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
-.card .value{font-size:1.25rem;font-weight:700;margin-top:5px}.label{color:var(--muted);font-size:.85rem}
-.subvalue{font-size:.76rem;color:var(--muted);margin-top:4px;word-break:break-word}
-.two{display:grid;grid-template-columns:1.2fr .8fr;gap:12px;margin-bottom:14px}
-.three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
-table{width:100%;border-collapse:collapse;font-size:.9rem}
-th,td{text-align:left;padding:9px 7px;border-bottom:1px solid var(--line);vertical-align:top}
-th{color:var(--muted);font-weight:600}.badge{display:inline-block;padding:3px 8px;border-radius:999px;background:#27314a;white-space:nowrap}
-.badge.reboot{background:#5a2b2b}.badge.wan{background:#55411e}.badge.problem{background:#4a2a42}
-.actions{display:flex;gap:8px;flex-wrap:wrap}
-button.btn,a.btn{color:#fff;text-decoration:none;padding:8px 11px;border:1px solid var(--line);border-radius:10px;background:#202942;font:inherit;cursor:pointer}
-button.btn.active{border-color:var(--accent)}
-canvas{width:100%;height:230px;background:#0e1424;border-radius:10px;border:1px solid var(--line)}
-.statrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
-.ministat{padding:9px;border:1px solid var(--line);border-radius:10px;background:#11182a}
-.ministat b{display:block;margin-top:3px}
-.diagnosis{line-height:1.55}
-.kicker{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
-@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}.three{grid-template-columns:1fr}.statrow{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:500px){main{padding:12px}.grid{grid-template-columns:1fr 1fr}.card{padding:11px}.card .value{font-size:1.05rem}.sampleline{display:block}.sampleline .sep{display:none}}
+:root{color-scheme:dark;--bg:#0b1020;--card:#151c2e;--card2:#11182a;--muted:#95a1b8;--line:#28334b;--ok:#4bd37b;--bad:#ff6b6b;--warn:#f4bf50;--accent:#6da8ff}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:#f5f7fb}main{max-width:1180px;margin:auto;padding:18px}
+header{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:18px;flex-wrap:wrap}h1{font-size:1.5rem;margin:0}.muted{color:var(--muted)}.small{font-size:.85rem}
+.titleline{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.mode{font-size:.72rem;font-weight:700;padding:4px 8px;border:1px solid var(--line);border-radius:999px;background:#202942;color:#cbd8ee}.mode.enhanced{border-color:#315887;color:#b9d4ff}
+.hero{padding:18px;border:1px solid var(--line);border-radius:16px;background:var(--card);margin-bottom:14px}.hero strong{font-size:1.3rem}.dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px;background:var(--warn)}.dot.ok{background:var(--ok)}.dot.bad{background:var(--bad)}
+.sampleline{margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.sampleline .sep{opacity:.45}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}.card .value{font-size:1.25rem;font-weight:700;margin-top:5px;overflow-wrap:anywhere}.label{color:var(--muted);font-size:.85rem}.subvalue{font-size:.76rem;color:var(--muted);margin-top:4px;overflow-wrap:anywhere}
+.two{display:grid;grid-template-columns:1.2fr .8fr;gap:12px;margin-bottom:14px}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}table{width:100%;border-collapse:collapse;font-size:.9rem}th,td{text-align:left;padding:9px 7px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-weight:600}.badge{display:inline-block;padding:3px 8px;border-radius:999px;background:#27314a;white-space:nowrap}.badge.reboot{background:#5a2b2b}.badge.wan{background:#55411e}.badge.problem{background:#4a2a42}.actions{display:flex;gap:8px;flex-wrap:wrap}button.btn,a.btn{color:#fff;text-decoration:none;padding:8px 11px;border:1px solid var(--line);border-radius:10px;background:#202942;font:inherit;cursor:pointer}canvas{width:100%;height:230px;background:#0e1424;border-radius:10px;border:1px solid var(--line)}.statrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}.ministat{padding:9px;border:1px solid var(--line);border-radius:10px;background:var(--card2)}.ministat b{display:block;margin-top:3px}.diagnosis{line-height:1.55}.kicker{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}.three{grid-template-columns:1fr}.statrow{grid-template-columns:repeat(2,1fr)}}@media(max-width:500px){main{padding:12px}.grid{grid-template-columns:1fr 1fr}.card{padding:11px}.card .value{font-size:1.05rem}.sampleline{display:block}.sampleline .sep{display:none}}
 </style>
 </head>
 <body>
 <main>
 <header>
   <div>
-    <h1>LineWatch</h1>
-    <div id="subtitle" class="muted small">FRITZ!Box · monitoraggio 24/7</div>
+    <div class="titleline"><h1>LineWatch</h1><span id="modeBadge" class="mode">...</span></div>
+    <div id="subtitle" class="muted small">Internet connection black box</div>
   </div>
   <div class="actions">
     <button id="langBtn" class="btn" type="button">EN</button>
@@ -58,264 +34,101 @@ canvas{width:100%;height:230px;background:#0e1424;border-radius:10px;border:1px 
 <section class="hero">
   <strong><span id="mainDot" class="dot"></span><span id="mainState" data-i18n="loading">Caricamento...</span></strong>
   <div class="sampleline muted small">
-    <span><span data-i18n="lastSample">Ultimo campione</span>: <b id="updated">-</b></span>
-    <span class="sep">•</span>
-    <span><span data-i18n="autoRefresh">Aggiornamento automatico</span>: 5 s</span>
+    <span><span data-i18n="lastSample">Ultimo campione</span>: <b id="updated">-</b></span><span class="sep">•</span><span><span data-i18n="autoRefresh">Aggiornamento automatico</span>: 5 s</span>
   </div>
 </section>
 
-<section class="grid">
-  <div class="card">
-    <div class="label" data-i18n="routerUptime">Uptime modem</div>
-    <div id="routerUptime" class="value">-</div>
-    <div id="routerBoot" class="subvalue"></div>
-  </div>
-  <div class="card">
-    <div class="label" data-i18n="wanUptime">Uptime Internet</div>
-    <div id="wanUptime" class="value">-</div>
-    <div id="wanStart" class="subvalue"></div>
-  </div>
-  <div class="card">
-    <div class="label" data-i18n="pingInternet">Ping Internet</div>
-    <div id="pingInternet" class="value">-</div>
-    <div id="pingDetail" class="subvalue"></div>
-  </div>
-  <div class="card">
-    <div class="label" data-i18n="pppoeState">Stato PPPoE</div>
-    <div id="wanStatus" class="value">-</div>
-    <div id="wanStatusRaw" class="subvalue"></div>
-  </div>
-</section>
-
-<section class="grid">
-  <div class="card"><div class="label" data-i18n="reboots24">Riavvii modem · 24h</div><div id="reboots1" class="value">-</div></div>
-  <div class="card"><div class="label" data-i18n="wanResets30">Reset PPPoE · 30 giorni</div><div id="wanResets30" class="value">-</div></div>
-  <div class="card"><div class="label" data-i18n="outages30">Interruzioni · 30 giorni</div><div id="outages30" class="value">-</div></div>
-  <div class="card"><div class="label" data-i18n="availability30">Disponibilità · 30 giorni</div><div id="availability30" class="value">-</div><div id="availabilityObserved" class="subvalue"></div></div>
-</section>
+<section id="primaryGrid" class="grid"></section>
+<section id="metricsGrid" class="grid"></section>
 
 <section class="three">
-  <div class="card">
-    <div class="kicker" data-i18n="automaticDiagnosis">Diagnosi automatica</div>
-    <div id="diagnosis" class="diagnosis" style="margin-top:8px">-</div>
-  </div>
-  <div class="card">
-    <div class="label" data-i18n="longestOutage">Outage più lungo registrato</div>
-    <div id="maxOutage" class="value">-</div>
-    <div class="subvalue"><span data-i18n="avgOutage">Durata media</span>: <span id="avgOutage">-</span></div>
-  </div>
-  <div class="card">
-    <div class="label" data-i18n="downtime30">Downtime · 30 giorni</div>
-    <div id="down30" class="value">-</div>
-    <div class="subvalue"><span data-i18n="reboots30">Riavvii modem 30 giorni</span>: <span id="reboots30">-</span></div>
-  </div>
+  <div class="card"><div class="kicker" data-i18n="automaticDiagnosis">Diagnosi automatica</div><div id="diagnosis" class="diagnosis" style="margin-top:8px">-</div></div>
+  <div class="card"><div class="label" data-i18n="longestOutage">Outage più lungo registrato</div><div id="maxOutage" class="value">-</div><div class="subvalue"><span data-i18n="avgOutage">Durata media</span>: <span id="avgOutage">-</span></div></div>
+  <div class="card"><div class="label" data-i18n="downtime30">Downtime · 30 giorni</div><div id="down30" class="value">-</div><div id="secondaryMetric" class="subvalue"></div></div>
 </section>
 
 <section class="two">
   <div class="card">
     <div class="label" data-i18n="latency24">Latenza ultime 24 ore</div>
     <canvas id="chart" width="900" height="260"></canvas>
-    <div class="statrow">
-      <div class="ministat"><span class="label">Min</span><b id="latMin">-</b></div>
-      <div class="ministat"><span class="label" data-i18n="average">Media</span><b id="latAvg">-</b></div>
-      <div class="ministat"><span class="label">P95</span><b id="latP95">-</b></div>
-      <div class="ministat"><span class="label">Max</span><b id="latMax">-</b></div>
-    </div>
+    <div class="statrow"><div class="ministat"><span class="label">Min</span><b id="latMin">-</b></div><div class="ministat"><span class="label" data-i18n="average">Media</span><b id="latAvg">-</b></div><div class="ministat"><span class="label">P95</span><b id="latP95">-</b></div><div class="ministat"><span class="label">Max</span><b id="latMax">-</b></div></div>
   </div>
   <div class="card">
     <div class="label" data-i18n="connectionDetails">Dettagli connessione</div>
-    <table>
-      <tr><th>Router</th><td id="routerModel">-</td></tr>
-      <tr><th>FRITZ!OS</th><td id="fritzos">-</td></tr><tr><th data-i18n="monitoringSince">Monitoraggio attivo da</th><td id="monitoringSince">-</td></tr>
-      <tr><th>IP WAN</th><td id="wanIp">-</td></tr>
-      <tr><th data-i18n="publicIp">IP pubblico</th><td id="publicIp">-</td></tr>
-      <tr><th>PoP / PPPoE AC</th><td id="pppoeAc">-</td></tr>
-      <tr><th data-i18n="lastWanError">Ultimo errore WAN</th><td><span id="wanError">-</span><div id="wanErrorRaw" class="subvalue"></div></td></tr>
-      <tr><th data-i18n="lastReboot">Ultimo riavvio rilevato</th><td id="lastReboot">-</td></tr>
-      <tr><th data-i18n="lastProblem">Ultimo problema</th><td id="lastProblem">-</td></tr>
-    </table>
+    <table><tbody id="details"></tbody></table>
   </div>
 </section>
 
 <section class="card">
-  <div>
-    <div style="font-weight:700" data-i18n="eventHistory">Cronologia eventi</div>
-    <div class="muted small" data-i18n="eventHistorySub">Descrizioni leggibili + classificazione tecnica salvata nel database.</div>
-  </div>
-  <div style="overflow:auto;margin-top:8px">
-    <table>
-      <thead><tr><th data-i18n="when">Quando</th><th data-i18n="event">Evento</th><th data-i18n="duration">Durata</th></tr></thead>
-      <tbody id="events"></tbody>
-    </table>
-  </div>
+  <div><div style="font-weight:700" data-i18n="eventHistory">Cronologia eventi</div><div class="muted small" data-i18n="eventHistorySub">Descrizioni leggibili + classificazione tecnica salvata nel database.</div></div>
+  <div style="overflow:auto;margin-top:8px"><table><thead><tr><th data-i18n="when">Quando</th><th data-i18n="event">Evento</th><th data-i18n="duration">Durata</th></tr></thead><tbody id="events"></tbody></table></div>
 </section>
 </main>
 
 <script>
 const I18N={
 it:{
-monitoring24:"monitoraggio 24/7",report:"Report ISP 30 gg",csv:"CSV 30 gg",
-loading:"Caricamento...",lastSample:"Ultimo campione",autoRefresh:"Aggiornamento automatico",
-routerUptime:"Uptime modem",wanUptime:"Uptime Internet",pingInternet:"Ping Internet",pppoeState:"Stato PPPoE",
-reboots24:"Riavvii modem · 24h",wanResets30:"Reset PPPoE · 30 giorni",outages30:"Interruzioni · 30 giorni",
-availability30:"Disponibilità · 30 giorni",observedFor:"Periodo osservato",monitoringSince:"Monitoraggio attivo da",automaticDiagnosis:"Diagnosi automatica",longestOutage:"Outage più lungo registrato",
-avgOutage:"Durata media",downtime30:"Downtime · 30 giorni",reboots30:"Riavvii modem 30 giorni",latency24:"Latenza ultime 24 ore",
-average:"Media",connectionDetails:"Dettagli connessione",publicIp:"IP pubblico",lastWanError:"Ultimo errore WAN",
-lastReboot:"Ultimo riavvio rilevato",lastProblem:"Ultimo problema",eventHistory:"Cronologia eventi",
-eventHistorySub:"Descrizioni leggibili + classificazione tecnica salvata nel database.",when:"Quando",event:"Evento",duration:"Durata",
-ok:"Connessione OK",problem:"Problema rilevato",connected:"Connessa",disconnected:"Disconnessa",noError:"Nessun errore",
-noneRecorded:"Nessuno registrato",bootEstimated:"Avvio modem stimato",wanEstablished:"Internet stabilita",
-reachable:"raggiungibile",webCheck:"Test web",diagnosisOk:"Modem e connessione Internet risultano operativi.",
-reconnectAfter:"Internet ristabilita circa {s} s dopo l'avvio del modem.",noOutages:"Nessuna interruzione registrata finora.",
-eventLabels:{
-FRITZBOX_REBOOT_DETECTED:"Riavvio modem rilevato",WAN_SESSION_RESET_DETECTED:"Reset connessione Internet (PPPoE)",
-WAN_IP_CHANGED:"Cambio IP WAN",ETHERNET_LINK_DOWN:"Collegamento Ethernet caduto",ROUTER_UNREACHABLE:"FRITZ!Box non raggiungibile",
-WAN_SESSION_DOWN:"Sessione Internet disconnessa",INTERNET_UNREACHABLE:"Internet non raggiungibile",DNS_FAILURE:"Problema DNS",
-HTTP_CONNECTIVITY_FAILURE:"Problema connettività web"} },
+report:"Report ISP 30 gg",csv:"CSV 30 gg",loading:"Caricamento...",lastSample:"Ultimo campione",autoRefresh:"Aggiornamento automatico",ok:"Connessione OK",problem:"Problema rilevato",
+genericMode:"Linux generico",enhancedMode:"FRITZ!Box avanzato",genericSubtitle:"monitoraggio Internet 24/7",enhancedSubtitle:"diagnostica router + Internet 24/7",gateway:"Gateway",publicIp:"IP pubblico",internetPing:"Ping Internet",probeMode:"Modalità",icmpUnavailable:"ICMP non disponibile",gatewayPing:"Ping gateway",routerUptime:"Uptime router",wanUptime:"Uptime Internet",wanStatus:"Stato WAN / PPPoE",connected:"Connessa",disconnected:"Disconnessa",bootEstimated:"Avvio router stimato",wanEstablished:"Internet stabilita",webCheck:"Test web",
+reboots24:"Riavvii router · 24h",wanResets30:"Reset WAN · 30 giorni",outages24:"Interruzioni · 24h",outages30:"Interruzioni · 30 giorni",availability30:"Disponibilità · 30 giorni",observedFor:"Periodo osservato",automaticDiagnosis:"Diagnosi automatica",longestOutage:"Outage più lungo registrato",avgOutage:"Durata media",downtime30:"Downtime · 30 giorni",reboots30:"Riavvii router 30 giorni",latencyP95:"P95 latenza · 24h",latency24:"Latenza ultime 24 ore",average:"Media",connectionDetails:"Dettagli connessione",monitoringSince:"Monitoraggio attivo da",router:"Router",lastWanError:"Ultimo errore WAN",lastReboot:"Ultimo riavvio rilevato",lastProblem:"Ultimo problema",noneRecorded:"Nessuno registrato",noError:"Nessun errore",eventHistory:"Cronologia eventi",eventHistorySub:"Descrizioni leggibili + classificazione tecnica salvata nel database.",when:"Quando",event:"Evento",duration:"Durata",diagnosisOk:"Connessione Internet attualmente operativa.",diagnosisEnhancedOk:"Router e connessione Internet risultano operativi.",reconnectAfter:"Internet ristabilita circa {s} s dopo l'avvio del router.",noOutages:" Nessuna interruzione registrata finora.",
+eventLabels:{FRITZBOX_REBOOT_DETECTED:"Riavvio FRITZ!Box rilevato",WAN_SESSION_RESET_DETECTED:"Reset sessione WAN/PPPoE",WAN_IP_CHANGED:"Cambio IP WAN/pubblico",ETHERNET_LINK_DOWN:"Collegamento Ethernet caduto",ROUTER_UNREACHABLE:"Router non raggiungibile",NETWORK_LINK_DOWN:"Collegamento di rete caduto",GATEWAY_UNREACHABLE:"Gateway non raggiungibile",WAN_SESSION_DOWN:"Sessione Internet disconnessa",INTERNET_UNREACHABLE:"Internet non raggiungibile",DNS_FAILURE:"Problema DNS",HTTP_CONNECTIVITY_FAILURE:"Problema connettività web"}},
 en:{
-monitoring24:"24/7 monitoring",report:"ISP report · 30 days",csv:"CSV · 30 days",
-loading:"Loading...",lastSample:"Last sample",autoRefresh:"Auto refresh",routerUptime:"Modem uptime",wanUptime:"Internet uptime",
-pingInternet:"Internet ping",pppoeState:"PPPoE status",reboots24:"Modem reboots · 24h",wanResets30:"PPPoE resets · 30 days",
-outages30:"Outages · 30 days",availability30:"Availability · 30 days",observedFor:"Observed period",monitoringSince:"Monitoring since",automaticDiagnosis:"Automatic diagnosis",
-longestOutage:"Longest recorded outage",avgOutage:"Average duration",downtime30:"Downtime · 30 days",
-reboots30:"Modem reboots · 30 days",latency24:"Latency · last 24 hours",average:"Average",
-connectionDetails:"Connection details",publicIp:"Public IP",lastWanError:"Last WAN error",lastReboot:"Last detected reboot",
-lastProblem:"Last problem",eventHistory:"Event history",eventHistorySub:"Readable descriptions + technical classification stored in the database.",
-when:"When",event:"Event",duration:"Duration",ok:"Connection OK",problem:"Problem detected",connected:"Connected",
-disconnected:"Disconnected",noError:"No error",noneRecorded:"None recorded",bootEstimated:"Estimated modem boot",
-wanEstablished:"Internet established",reachable:"reachable",webCheck:"Web check",
-diagnosisOk:"Modem and Internet connection are currently operational.",
-reconnectAfter:"Internet was restored about {s} s after the modem booted.",noOutages:"No outages recorded so far.",
-eventLabels:{
-FRITZBOX_REBOOT_DETECTED:"Modem reboot detected",WAN_SESSION_RESET_DETECTED:"Internet session reset (PPPoE)",
-WAN_IP_CHANGED:"WAN IP changed",ETHERNET_LINK_DOWN:"Ethernet link down",ROUTER_UNREACHABLE:"FRITZ!Box unreachable",
-WAN_SESSION_DOWN:"Internet session disconnected",INTERNET_UNREACHABLE:"Internet unreachable",DNS_FAILURE:"DNS failure",
-HTTP_CONNECTIVITY_FAILURE:"Web connectivity failure"} }
+report:"ISP report · 30 days",csv:"CSV · 30 days",loading:"Loading...",lastSample:"Last sample",autoRefresh:"Auto refresh",ok:"Connection OK",problem:"Problem detected",
+genericMode:"Generic Linux",enhancedMode:"FRITZ!Box enhanced",genericSubtitle:"24/7 Internet monitoring",enhancedSubtitle:"24/7 router + Internet diagnostics",gateway:"Gateway",publicIp:"Public IP",internetPing:"Internet ping",probeMode:"Mode",icmpUnavailable:"ICMP unavailable",gatewayPing:"Gateway ping",routerUptime:"Router uptime",wanUptime:"Internet uptime",wanStatus:"WAN / PPPoE status",connected:"Connected",disconnected:"Disconnected",bootEstimated:"Estimated router boot",wanEstablished:"Internet established",webCheck:"Web check",
+reboots24:"Router reboots · 24h",wanResets30:"WAN resets · 30 days",outages24:"Outages · 24h",outages30:"Outages · 30 days",availability30:"Availability · 30 days",observedFor:"Observed period",automaticDiagnosis:"Automatic diagnosis",longestOutage:"Longest recorded outage",avgOutage:"Average duration",downtime30:"Downtime · 30 days",reboots30:"Router reboots · 30 days",latencyP95:"Latency P95 · 24h",latency24:"Latency · last 24 hours",average:"Average",connectionDetails:"Connection details",monitoringSince:"Monitoring since",router:"Router",lastWanError:"Last WAN error",lastReboot:"Last detected reboot",lastProblem:"Last problem",noneRecorded:"None recorded",noError:"No error",eventHistory:"Event history",eventHistorySub:"Readable descriptions + technical classification stored in the database.",when:"When",event:"Event",duration:"Duration",diagnosisOk:"Internet connection is currently operational.",diagnosisEnhancedOk:"Router and Internet connection are currently operational.",reconnectAfter:"Internet was restored about {s} s after the router booted.",noOutages:" No outages recorded so far.",
+eventLabels:{FRITZBOX_REBOOT_DETECTED:"FRITZ!Box reboot detected",WAN_SESSION_RESET_DETECTED:"WAN/PPPoE session reset",WAN_IP_CHANGED:"WAN/public IP changed",ETHERNET_LINK_DOWN:"Ethernet link down",ROUTER_UNREACHABLE:"Router unreachable",NETWORK_LINK_DOWN:"Network link down",GATEWAY_UNREACHABLE:"Gateway unreachable",WAN_SESSION_DOWN:"Internet session disconnected",INTERNET_UNREACHABLE:"Internet unreachable",DNS_FAILURE:"DNS failure",HTTP_CONNECTIVITY_FAILURE:"Web connectivity failure"}}
 };
-let lang=localStorage.getItem("linewatch_lang")||"it";
-let lastStatus=null,lastEvents=[],lastHistory=[];
-
-function t(k){return I18N[lang][k]??k}
-function set(id,v){document.getElementById(id).textContent=(v===null||v===undefined||v==="")?"-":v}
-function fmtDate(v){
-  if(!v)return "-";
-  const d=new Date(v);
-  return new Intl.DateTimeFormat(lang==="it"?"it-IT":"en-GB",{dateStyle:"short",timeStyle:"medium"}).format(d);
-}
-function dur(s){
-  if(s===null||s===undefined)return "-"; s=Math.round(Number(s));
-  let d=Math.floor(s/86400);s%=86400;let h=Math.floor(s/3600);s%=3600;let m=Math.floor(s/60);let sec=s%60;
-  if(lang==="it"){if(d)return `${d}g ${h}h ${m}m`;if(h)return `${h}h ${m}m`;if(m)return `${m}m ${sec}s`;return `${sec}s`}
-  if(d)return `${d}d ${h}h ${m}m`;if(h)return `${h}h ${m}m`;if(m)return `${m}m ${sec}s`;return `${sec}s`;
-}
+let lang=localStorage.getItem("linewatch_lang")||"it",lastStatus=null,lastEvents=[],lastHistory=[];
+const t=k=>I18N[lang][k]??k;
+const esc=v=>String(v??"-").replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]));
+function fmtDate(v){if(!v)return "-";const d=new Date(v);return new Intl.DateTimeFormat(lang==="it"?"it-IT":"en-GB",{dateStyle:"short",timeStyle:"medium"}).format(d)}
+function dur(s){if(s===null||s===undefined)return "-";s=Math.round(Number(s));let d=Math.floor(s/86400);s%=86400;let h=Math.floor(s/3600);s%=3600;let m=Math.floor(s/60),sec=s%60;if(lang==="it"){if(d)return `${d}g ${h}h ${m}m`;if(h)return `${h}h ${m}m`;if(m)return `${m}m ${sec}s`;return `${sec}s`}if(d)return `${d}d ${h}h ${m}m`;if(h)return `${h}h ${m}m`;if(m)return `${m}m ${sec}s`;return `${sec}s`}
+function fmtPct(v){const n=Number(v);if(!Number.isFinite(n))return "-";const digits=n>=99.99&&n<100?3:(n===100?0:2);return new Intl.NumberFormat(lang==="it"?"it-IT":"en-GB",{maximumFractionDigits:digits}).format(n)+"%"}
 function eventLabel(type){return I18N[lang].eventLabels[type]||type}
-function fmtPct(v){
-  const n=Number(v);
-  if(!Number.isFinite(n))return "-";
-  const maxDigits = n >= 99.99 && n < 100 ? 3 : (n === 100 ? 0 : 2);
-  return new Intl.NumberFormat(
-    lang==="it"?"it-IT":"en-GB",
-    {minimumFractionDigits:0,maximumFractionDigits:maxDigits}
-  ).format(n)+"%";
-}
-function translateStatic(){
-  document.documentElement.lang=lang;
-  document.querySelectorAll("[data-i18n]").forEach(el=>{el.textContent=t(el.dataset.i18n)});
-  document.getElementById("langBtn").textContent=lang==="it"?"EN":"IT";
-  document.getElementById("reportBtn").href=`/export/isp.txt?days=30&lang=${lang}`;
-}
+function card(label,value,sub=""){return `<div class="card"><div class="label">${esc(label)}</div><div class="value">${esc(value)}</div>${sub?`<div class="subvalue">${esc(sub)}</div>`:""}</div>`}
+function detail(label,value){return `<tr><th>${esc(label)}</th><td>${esc(value)}</td></tr>`}
+function translateStatic(){document.documentElement.lang=lang;document.querySelectorAll("[data-i18n]").forEach(el=>el.textContent=t(el.dataset.i18n));document.getElementById("langBtn").textContent=lang==="it"?"EN":"IT";document.getElementById("reportBtn").href=`/export/isp.txt?days=30&lang=${lang}`}
 function renderStatus(s){
-  if(!s||!s.ready){set("mainState",s?.reason||t("loading"));return}
-  const dot=document.getElementById("mainDot"); dot.className="dot "+(s.current_ok?"ok":"bad");
-  set("mainState",s.current_ok?t("ok"):t("problem"));
-  set("subtitle",`${s.router_model||"FRITZ!Box"} · ${t("monitoring24")}`);
-  set("updated",fmtDate(s.ts));
-  set("routerUptime",lang==="it"?s.router_uptime.replaceAll("d","g"):s.router_uptime);
-  set("routerBoot",`${t("bootEstimated")}: ${fmtDate(s.router_boot_iso)}`);
-  set("wanUptime",lang==="it"?s.wan_uptime.replaceAll("d","g"):s.wan_uptime);
-  set("wanStart",`${t("wanEstablished")}: ${fmtDate(s.wan_start_iso)}`);
-  set("pingInternet",s.internet_ok?`${s.internet_ms??"-"} ms`:(lang==="it"?"NON RAGGIUNGIBILE":"UNREACHABLE"));
-  set("pingDetail",`DNS ${s.dns_ms??"-"} ms · ${t("webCheck")} ${s.http_ms??"-"} ms`);
-  const ws=s.wan_status==="Connected"?t("connected"):(s.wan_status==="Disconnected"?t("disconnected"):s.wan_status);
-  set("wanStatus",ws); set("wanStatusRaw",s.wan_status?`TR-064: ${s.wan_status}`:"");
-  set("reboots1",s.windows["1"].reboots);
-  set("wanResets30",s.windows["30"].wan_resets);
-  set("outages30",s.windows["30"].outages);
-  set("availability30",fmtPct(s.windows["30"].availability_pct));
-  set("availabilityObserved",`${t("observedFor")}: ${dur(s.windows["30"].observed_s)}`);
-  set("down30",dur(s.windows["30"].downtime_s));
-  set("reboots30",s.windows["30"].reboots);
-  set("maxOutage",dur(s.outage_stats.max_s));
-  set("avgOutage",dur(s.outage_stats.avg_s));
-  set("latMin",s.latency_24h.min==null?"-":`${s.latency_24h.min} ms`);
-  set("latAvg",s.latency_24h.avg==null?"-":`${s.latency_24h.avg} ms`);
-  set("latP95",s.latency_24h.p95==null?"-":`${s.latency_24h.p95} ms`);
-  set("latMax",s.latency_24h.max==null?"-":`${s.latency_24h.max} ms`);
-  set("routerModel",s.router_model);set("fritzos",s.fritzos);set("monitoringSince",fmtDate(s.monitoring_since));set("wanIp",s.wan_ip);set("publicIp",s.public_ip);set("pppoeAc",s.pppoe_ac_name);
-  set("wanError",s.wan_last_error==="ERROR_NONE"?t("noError"):s.wan_last_error);
-  set("wanErrorRaw",s.wan_last_error?`TR-064: ${s.wan_last_error}`:"");
-  set("lastReboot",s.last_reboot?fmtDate(s.last_reboot.start_ts):t("noneRecorded"));
-  set("lastProblem",s.last_problem?`${eventLabel(s.last_problem.event_type)} · ${fmtDate(s.last_problem.start_ts)}`:t("noneRecorded"));
-  let diag=s.current_ok?t("diagnosisOk"):t("problem");
-  if(s.reconnect_delay_s!==null&&s.reconnect_delay_s!==undefined){
-    diag+=" "+t("reconnectAfter").replace("{s}",s.reconnect_delay_s);
+  if(!s||!s.ready){document.getElementById("mainState").textContent=s?.reason||t("loading");return}
+  const enhanced=!!s.fritz_enhanced,dot=document.getElementById("mainDot");dot.className="dot "+(s.current_ok?"ok":"bad");document.getElementById("mainState").textContent=s.current_ok?t("ok"):t("problem");document.getElementById("updated").textContent=fmtDate(s.ts);
+  const mode=document.getElementById("modeBadge");mode.textContent=enhanced?t("enhancedMode"):t("genericMode");mode.className="mode"+(enhanced?" enhanced":"");document.getElementById("subtitle").textContent=enhanced?`${s.router_model||"FRITZ!Box"} · ${t("enhancedSubtitle")}`:t("genericSubtitle");
+  let primary="";
+  if(enhanced){
+    primary+=card(t("routerUptime"),s.router_uptime,`${t("bootEstimated")}: ${fmtDate(s.router_boot_iso)}`);
+    primary+=card(t("wanUptime"),s.wan_uptime,`${t("wanEstablished")}: ${fmtDate(s.wan_start_iso)}`);
+    primary+=card(t("internetPing"),s.internet_ms!=null?`${s.internet_ms} ms`:t("icmpUnavailable"),`DNS ${s.dns_ms??"-"} ms · ${t("webCheck")} ${s.http_ms??"-"} ms`);
+    const ws=s.wan_status==="Connected"?t("connected"):(s.wan_status==="Disconnected"?t("disconnected"):(s.wan_status||"-"));primary+=card(t("wanStatus"),ws,s.wan_transport||"");
+  }else{
+    primary+=card(t("gateway"),s.gateway,s.gateway_ms!=null?`${t("gatewayPing")}: ${s.gateway_ms} ms`:`${t("gatewayPing")}: ${t("icmpUnavailable")}`);
+    primary+=card(t("publicIp"),s.public_ip||"-");
+    primary+=card(t("internetPing"),s.internet_ms!=null?`${s.internet_ms} ms`:t("icmpUnavailable"),`DNS ${s.dns_ms??"-"} ms · ${t("webCheck")} ${s.http_ms??"-"} ms`);
+    primary+=card(t("probeMode"),t("genericMode"),"ICMP · DNS · HTTP");
   }
-  if(s.outage_stats.count===0)diag+=" "+t("noOutages");
-  set("diagnosis",diag);
-}
-function badgeClass(type){
-  if(type==="FRITZBOX_REBOOT_DETECTED")return "reboot";
-  if(type==="WAN_SESSION_RESET_DETECTED")return "wan";
-  return "problem";
-}
-function renderEvents(rows){
-  document.getElementById("events").innerHTML=rows.map(e=>
-   `<tr><td>${fmtDate(e.start_ts)}</td><td><span class="badge ${badgeClass(e.event_type)}">${eventLabel(e.event_type)}</span><div class="subvalue">${e.event_type}</div></td><td>${dur(e.duration_s)}</td></tr>`
-  ).join("")||`<tr><td colspan="3" class="muted">${t("noneRecorded")}</td></tr>`;
-}
-function draw(rows){
-  const c=document.getElementById("chart"),ctx=c.getContext("2d"),w=c.width,h=c.height;
-  ctx.clearRect(0,0,w,h);ctx.font="12px system-ui";
-  if(rows.length<2)return;
-  const vals=rows.map(r=>Number(r.internet_ms)).filter(v=>Number.isFinite(v));
-  let max=Math.max(50,...vals); max=Math.ceil(Math.min(max,500)/25)*25;
-  ctx.strokeStyle="#28334b";ctx.fillStyle="#95a1b8";ctx.lineWidth=1;
-  for(let i=0;i<=4;i++){
-    let y=10+(h-30)*(i/4),v=Math.round(max*(1-i/4));
-    ctx.beginPath();ctx.moveTo(42,y);ctx.lineTo(w-8,y);ctx.stroke();
-    ctx.fillText(`${v} ms`,4,y+4);
+  document.getElementById("primaryGrid").innerHTML=primary;
+  const w1=s.windows["1"],w30=s.windows["30"];
+  let metrics="";
+  if(enhanced){
+    metrics+=card(t("reboots24"),w1.reboots);
+    metrics+=card(t("wanResets30"),w30.wan_resets);
+  }else{
+    metrics+=card(t("outages24"),w1.outages);
+    metrics+=card(t("latencyP95"),s.latency_24h.p95==null?"-":`${s.latency_24h.p95} ms`);
   }
-  ctx.strokeStyle="#6da8ff";ctx.lineWidth=2;ctx.beginPath();
-  rows.forEach((r,i)=>{
-    const x=42+i/(rows.length-1)*(w-50),v=Number(r.internet_ms);
-    const y=10+(h-30)*(1-Math.min(Number.isFinite(v)?v:max,max)/max);
-    if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
-  });ctx.stroke();
-  rows.forEach((r,i)=>{
-    if(!r.internet_ok){
-      const x=42+i/(rows.length-1)*(w-50);
-      ctx.strokeStyle="#ff6b6b";ctx.beginPath();ctx.moveTo(x,10);ctx.lineTo(x,h-20);ctx.stroke();
-    }
-  });
+  metrics+=card(t("outages30"),w30.outages);
+  metrics+=card(t("availability30"),fmtPct(w30.availability_pct),`${t("observedFor")}: ${dur(w30.observed_s)}`);
+  document.getElementById("metricsGrid").innerHTML=metrics;
+  document.getElementById("down30").textContent=dur(w30.downtime_s);document.getElementById("secondaryMetric").textContent=enhanced?`${t("reboots30")}: ${w30.reboots}`:`${t("outages30")}: ${w30.outages}`;document.getElementById("maxOutage").textContent=dur(s.outage_stats.max_s);document.getElementById("avgOutage").textContent=dur(s.outage_stats.avg_s);
+  for(const [id,k] of [["latMin","min"],["latAvg","avg"],["latP95","p95"],["latMax","max"]])document.getElementById(id).textContent=s.latency_24h[k]==null?"-":`${s.latency_24h[k]} ms`;
+  let diag=s.current_ok?(enhanced?t("diagnosisEnhancedOk"):t("diagnosisOk")):t("problem");if(enhanced&&s.reconnect_delay_s!=null)diag+=" "+t("reconnectAfter").replace("{s}",s.reconnect_delay_s);if(s.outage_stats.count===0)diag+=t("noOutages");document.getElementById("diagnosis").textContent=diag;
+  let rows=detail(t("gateway"),s.gateway)+detail(t("publicIp"),s.public_ip)+detail(t("monitoringSince"),fmtDate(s.monitoring_since));
+  if(enhanced){rows=detail(t("router"),s.router_model)+detail("FRITZ!OS",s.fritzos)+rows+detail("IP WAN",s.wan_ip)+detail("PoP / PPPoE AC",s.pppoe_ac_name)+detail(t("lastWanError"),s.wan_last_error==="ERROR_NONE"?t("noError"):(s.wan_last_error||"-"))+detail(t("lastReboot"),s.last_reboot?fmtDate(s.last_reboot.start_ts):t("noneRecorded"))}
+  rows+=detail(t("lastProblem"),s.last_problem?`${eventLabel(s.last_problem.event_type)} · ${fmtDate(s.last_problem.start_ts)}`:t("noneRecorded"));document.getElementById("details").innerHTML=rows;
 }
-async function refresh(){
-  lastStatus=await fetch("/api/status",{cache:"no-store"}).then(r=>r.json());
-  renderStatus(lastStatus);
-}
-async function refreshEvents(){
-  lastEvents=await fetch("/api/events?limit=60",{cache:"no-store"}).then(r=>r.json());
-  renderEvents(lastEvents);
-}
-async function refreshHistory(){
-  lastHistory=await fetch("/api/history?hours=24",{cache:"no-store"}).then(r=>r.json());
-  draw(lastHistory);
-}
-document.getElementById("langBtn").addEventListener("click",()=>{
-  lang=lang==="it"?"en":"it";localStorage.setItem("linewatch_lang",lang);translateStatic();
-  if(lastStatus)renderStatus(lastStatus);renderEvents(lastEvents);draw(lastHistory);
-});
-translateStatic();refresh();refreshEvents();refreshHistory();
-setInterval(refresh,5000);setInterval(refreshEvents,10000);setInterval(refreshHistory,30000);
+function badgeClass(type){if(type==="FRITZBOX_REBOOT_DETECTED")return "reboot";if(type==="WAN_SESSION_RESET_DETECTED")return "wan";return "problem"}
+function renderEvents(rows){document.getElementById("events").innerHTML=rows.map(e=>`<tr><td>${esc(fmtDate(e.start_ts))}</td><td><span class="badge ${badgeClass(e.event_type)}">${esc(eventLabel(e.event_type))}</span><div class="subvalue">${esc(e.event_type)}</div></td><td>${esc(dur(e.duration_s))}</td></tr>`).join("")||`<tr><td colspan="3" class="muted">${esc(t("noneRecorded"))}</td></tr>`}
+function draw(rows){const c=document.getElementById("chart"),ctx=c.getContext("2d"),w=c.width,h=c.height;ctx.clearRect(0,0,w,h);ctx.font="12px system-ui";if(rows.length<2)return;const vals=rows.filter(r=>r.internet_ms!=null).map(r=>Number(r.internet_ms)).filter(Number.isFinite);let max=Math.max(50,...vals);max=Math.ceil(Math.min(max,500)/25)*25;ctx.strokeStyle="#28334b";ctx.fillStyle="#95a1b8";ctx.lineWidth=1;for(let i=0;i<=4;i++){const y=10+(h-30)*(i/4),v=Math.round(max*(1-i/4));ctx.beginPath();ctx.moveTo(42,y);ctx.lineTo(w-8,y);ctx.stroke();ctx.fillText(`${v} ms`,4,y+4)}ctx.strokeStyle="#6da8ff";ctx.lineWidth=2;let drawing=false;rows.forEach((r,i)=>{if(r.internet_ms==null){if(drawing){ctx.stroke();drawing=false}return}const v=Number(r.internet_ms);if(!Number.isFinite(v)){if(drawing){ctx.stroke();drawing=false}return}const x=42+i/(rows.length-1)*(w-50),y=10+(h-30)*(1-Math.min(v,max)/max);if(!drawing){ctx.beginPath();ctx.moveTo(x,y);drawing=true}else ctx.lineTo(x,y);const next=rows[i+1];if(!next||next.internet_ms==null){ctx.stroke();drawing=false}});if(drawing)ctx.stroke();rows.forEach((r,i)=>{if(!r.internet_ok&&!r.dns_ok&&!r.http_ok){const x=42+i/(rows.length-1)*(w-50);ctx.strokeStyle="#ff6b6b";ctx.beginPath();ctx.moveTo(x,10);ctx.lineTo(x,h-20);ctx.stroke()}})}
+async function refresh(){try{lastStatus=await fetch("/api/status",{cache:"no-store"}).then(r=>r.json());renderStatus(lastStatus)}catch(e){document.getElementById("mainState").textContent=String(e)}}async function refreshEvents(){lastEvents=await fetch("/api/events?limit=60",{cache:"no-store"}).then(r=>r.json());renderEvents(lastEvents)}async function refreshHistory(){lastHistory=await fetch("/api/history?hours=24",{cache:"no-store"}).then(r=>r.json());draw(lastHistory)}
+document.getElementById("langBtn").addEventListener("click",()=>{lang=lang==="it"?"en":"it";localStorage.setItem("linewatch_lang",lang);translateStatic();if(lastStatus)renderStatus(lastStatus);renderEvents(lastEvents);draw(lastHistory)});translateStatic();refresh();refreshEvents();refreshHistory();setInterval(refresh,5000);setInterval(refreshEvents,10000);setInterval(refreshHistory,30000);
 </script>
 </body>
 </html>
