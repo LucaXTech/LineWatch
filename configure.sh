@@ -4,9 +4,9 @@ set -euo pipefail
 APP_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$APP_DIR"
 
-echo "LineWatch configuration"
+echo "UplinkWitness configuration"
 echo
-echo "LineWatch can run with any ordinary Linux Internet connection."
+echo "UplinkWitness can run with any ordinary Linux Internet connection."
 echo "FRITZ!Box credentials are only needed for enhanced TR-064 diagnostics"
 echo "such as router reboot and WAN/PPPoE session reset detection."
 echo

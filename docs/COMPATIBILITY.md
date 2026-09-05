@@ -1,6 +1,6 @@
 # Compatibility matrix
 
-This document separates **verified** configurations from planned or community-reported support. LineWatch intentionally avoids claiming broad compatibility without evidence.
+This document separates **verified** configurations from planned or community-reported support. UplinkWitness intentionally avoids claiming broad compatibility without evidence.
 
 ## Verified by the maintainer
 
@@ -30,7 +30,9 @@ Compatibility reports are welcome for other:
 - FRITZ!Box models / FRITZ!OS releases
 - routers that do not answer ICMP on the default gateway
 
-Please use the repository’s **Compatibility report** issue template and include the LineWatch version/commit, Linux distribution, architecture, interface type, router model and the checklist sections that passed or failed.
+Please use the repository’s **Compatibility report** issue template and include the UplinkWitness version/commit, Linux distribution, architecture, interface type, router model and the checklist sections that passed or failed.
+
+Releases through v1.1.0 were published under the former **LineWatch** name. Results from those releases remain valid after the public rename because the runtime monitoring core and compatibility identifiers are unchanged.
 
 ## Not yet advertised as supported
 

@@ -117,7 +117,7 @@ def dns_check():
 def http_check():
     t = time.monotonic()
     try:
-        req = urllib.request.Request(HTTP_URL, headers={"User-Agent": "LineWatch/1.1"})
+        req = urllib.request.Request(HTTP_URL, headers={"User-Agent": "UplinkWitness/1.1"})
         with urllib.request.urlopen(req, timeout=3) as response:
             response.read(32)
         return 1, round((time.monotonic() - t) * 1000, 2)
@@ -128,7 +128,7 @@ def http_check():
 def public_ip():
     try:
         req = urllib.request.Request(
-            PUBLIC_IP_URL, headers={"User-Agent": "LineWatch/1.1"}
+            PUBLIC_IP_URL, headers={"User-Agent": "UplinkWitness/1.1"}
         )
         with urllib.request.urlopen(req, timeout=3) as response:
             return response.read(128).decode().strip() or None
@@ -377,12 +377,12 @@ def main():
         else ("on" if gateway_probe_active else "off")
     )
     print(
-        f"[LineWatch] gateway: {route_gateway}; interface: {interface or 'unknown'}; "
+        f"[UplinkWitness] gateway: {route_gateway}; interface: {interface or 'unknown'}; "
         f"router mode: {router_mode}; gateway probe: {probe_label}",
         flush=True,
     )
     if fritz:
-        print(f"[LineWatch] FRITZ!Box/TR-064 host: {router_host}", flush=True)
+        print(f"[UplinkWitness] FRITZ!Box/TR-064 host: {router_host}", flush=True)
 
     conn = connect_db()
     state = {}
@@ -424,13 +424,13 @@ def main():
             if gok:
                 gateway_probe_active = True
                 print(
-                    "[LineWatch] gateway ICMP probe supported; using it for incident classification.",
+                    "[UplinkWitness] gateway ICMP probe supported; using it for incident classification.",
                     flush=True,
                 )
             elif iok or dok or hok:
                 gateway_probe_active = False
                 print(
-                    "[LineWatch] gateway does not answer ICMP while Internet works; "
+                    "[UplinkWitness] gateway does not answer ICMP while Internet works; "
                     "gateway ping will not be used to declare outages.",
                     flush=True,
                 )

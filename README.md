@@ -1,38 +1,40 @@
-# LineWatch
+# UplinkWitness
 
-[![CI](https://github.com/LucaXTech/LineWatch/actions/workflows/ci.yml/badge.svg)](https://github.com/LucaXTech/LineWatch/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/release/LucaXTech/LineWatch)](https://github.com/LucaXTech/LineWatch/releases/latest)
+[![CI](https://github.com/LucaXTech/UplinkWitness/actions/workflows/ci.yml/badge.svg)](https://github.com/LucaXTech/UplinkWitness/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/LucaXTech/UplinkWitness)](https://github.com/LucaXTech/UplinkWitness/releases/latest)
 ![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
 ![Linux](https://img.shields.io/badge/Linux-self--hosted-success)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 > **Know what actually went down.**
 
-**LineWatch is a self-hosted Internet connection black box for Linux.** Most uptime monitors tell you that something stopped answering; LineWatch tries to preserve enough local evidence to tell you **where the failure was**: local link, gateway, upstream Internet, DNS, HTTP, or — with optional router telemetry — the router/WAN session itself.
+**UplinkWitness is a self-hosted Internet connection black box for Linux.** Most uptime monitors tell you that something stopped answering; UplinkWitness tries to preserve enough local evidence to tell you **where the failure was**: local link, gateway, upstream Internet, DNS, HTTP, or — with optional router telemetry — the router/WAN session itself.
 
 It works with ordinary routers in **generic Linux mode** and becomes more diagnostic with a **FRITZ!Box** through TR-064. A Raspberry Pi is a convenient always-on deployment target, **not a requirement**.
 
-**Current stable release:** [v1.1.0](https://github.com/LucaXTech/LineWatch/releases/tag/v1.1.0) · [Quick install](#quick-install) · [Compatibility](docs/COMPATIBILITY.md) · [Roadmap](ROADMAP.md) · [Contributing](CONTRIBUTING.md)
+**Latest release:** [GitHub Releases](https://github.com/LucaXTech/UplinkWitness/releases/latest) · [Quick install](#quick-install) · [Compatibility](docs/COMPATIBILITY.md) · [Roadmap](ROADMAP.md) · [Contributing](CONTRIBUTING.md) · [Rename notes](docs/RENAMING.md)
+
+> **Project rename:** releases through v1.1.0 were published as **LineWatch**. The public project is now **UplinkWitness**. Existing runtime identifiers such as `linewatch.service`, `LINEWATCH_*` environment variables and `data/linewatch.sqlite3` are intentionally retained for upgrade compatibility. See [docs/RENAMING.md](docs/RENAMING.md).
 
 ## Screenshots
 
 ### Desktop dashboard
 
-![LineWatch desktop dashboard](docs/screenshots/dashboard-desktop.png)
+![UplinkWitness desktop dashboard](docs/screenshots/dashboard-desktop.png)
 
 ### Mobile dashboard
 
 <p align="center">
-  <img src="docs/screenshots/dashboard-mobile.png" alt="LineWatch mobile dashboard" width="360">
+  <img src="docs/screenshots/dashboard-mobile.png" alt="UplinkWitness mobile dashboard" width="360">
 </p>
 
-> The screenshots currently show the FRITZ!Box-enhanced dashboard. In generic mode, FRITZ-specific cards are replaced by gateway and generic connectivity diagnostics.
+> The screenshots currently show the FRITZ!Box-enhanced dashboard. In generic mode, FRITZ-specific cards are replaced by gateway and generic connectivity diagnostics. Screenshots from v1.1 may still show the former LineWatch name while the rebrand is being completed.
 
-## Why LineWatch?
+## Why UplinkWitness?
 
 A normal uptime check can tell you that a target stopped answering. That is useful, but it often does not tell you **which part of a home Internet connection failed**.
 
-LineWatch combines multiple signals and keeps the evidence locally:
+UplinkWitness combines multiple signals and keeps the evidence locally:
 
 - Linux network-link state when available
 - default-gateway reachability
@@ -77,7 +79,7 @@ This is particularly useful for short or intermittent faults that disappear befo
 - latency trends
 - outage duration, total downtime and observed-period availability
 
-LineWatch does **not** assume that every router or Internet path answers ICMP. In automatic gateway-probe mode, a router that drops ping while DNS/HTTP remain healthy is not incorrectly classified as down.
+UplinkWitness does **not** assume that every router or Internet path answers ICMP. In automatic gateway-probe mode, a router that drops ping while DNS/HTTP remain healthy is not incorrectly classified as down.
 
 ### With FRITZ!Box telemetry
 
@@ -102,7 +104,7 @@ The responsive local dashboard provides:
 - CSV event export
 - human-readable ISP diagnostic report
 
-Availability is calculated only over the period LineWatch has actually observed. A new installation does not pretend to have 30 days of monitoring history.
+Availability is calculated only over the period UplinkWitness has actually observed. A new installation does not pretend to have 30 days of monitoring history.
 
 ## Where it can run
 
@@ -114,7 +116,7 @@ The monitor is designed for an **always-on Linux host**. Good deployment targets
 - Linux VM
 - other ARM or x86 Linux systems with the required networking tools
 
-For meaningful line diagnostics, an **Ethernet-connected always-on machine is recommended**. Wi-Fi can work, but then local wireless problems become part of what LineWatch observes.
+For meaningful line diagnostics, an **Ethernet-connected always-on machine is recommended**. Wi-Fi can work, but then local wireless problems become part of what UplinkWitness observes.
 
 The automatic installer currently targets systems with `apt` and `systemd`, including Debian, Ubuntu and Raspberry Pi OS. Other Linux distributions can use the manual setup path once Python, `iproute2` and `ping` are available.
 
@@ -129,8 +131,8 @@ See [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md) for the current matrix and [d
 Recommended: an always-on Debian/Ubuntu/Raspberry Pi OS machine connected by Ethernet.
 
 ```bash
-git clone https://github.com/LucaXTech/LineWatch.git
-cd LineWatch
+git clone https://github.com/LucaXTech/UplinkWitness.git
+cd UplinkWitness
 chmod +x install.sh
 ./install.sh
 ```
@@ -141,7 +143,7 @@ The installer asks whether you want FRITZ!Box enhanced diagnostics.
 
 Choose **No** when asked about FRITZ!Box integration. No router credentials are required.
 
-LineWatch will monitor the Linux default gateway and external connectivity probes.
+UplinkWitness will monitor the Linux default gateway and external connectivity probes.
 
 ### FRITZ!Box enhanced mode
 
@@ -149,13 +151,13 @@ Choose **Yes** and provide a FRITZ!Box account allowed to access router settings
 
 A dedicated account is optional. Remote/Internet access for that account is not required.
 
-After installation, open:
+After installation, open the dashboard on port `8080` of the Linux host. For example:
 
 ```text
-http://linewatch.local:8080
+http://<host-lan-ip>:8080
 ```
 
-If mDNS is unavailable, use the Linux host's LAN IP with port `8080`.
+If the machine is already reachable as `linewatch.local`, that hostname continues to work; the project rename does not change your host's network name.
 
 ## Manual configuration
 
@@ -198,9 +200,11 @@ FRITZ_HOST=
 `off`
 : Never use gateway ICMP to classify an outage.
 
-Leaving `LINEWATCH_INTERFACE` empty lets LineWatch detect the interface associated with the Linux IPv4 default route.
+Leaving `LINEWATCH_INTERFACE` empty lets UplinkWitness detect the interface associated with the Linux IPv4 default route.
 
 ## Services
+
+Existing service identifiers deliberately retain the original internal name:
 
 ```bash
 systemctl status linewatch
@@ -221,9 +225,9 @@ For private remote access, use a VPN or mesh VPN such as Tailscale.
 
 ## Data and privacy
 
-Runtime data stays on the machine running LineWatch:
+Runtime data stays on the machine running UplinkWitness:
 
-- `data/linewatch.sqlite3` — SQLite database
+- `data/linewatch.sqlite3` — SQLite database; legacy-compatible filename
 - `data/events/` — incident bundles and optional FRITZ!Box logs
 
 The repository ignores `.env`, runtime databases and logs. Do not commit real router credentials, event logs, public IP addresses or personal network data.
@@ -231,7 +235,7 @@ The repository ignores `.env`, runtime databases and logs. Do not commit real ro
 ## Architecture
 
 ```text
-                     LineWatch Core
+                  UplinkWitness Core
                           │
          ┌────────────────┼────────────────┐
          │                │                │
@@ -268,7 +272,7 @@ Bug reports, Linux compatibility results, FRITZ!Box model reports, tests and rou
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. The current development priorities are tracked in [ROADMAP.md](ROADMAP.md).
 
-If you test LineWatch on different hardware, include:
+If you test UplinkWitness on different hardware, include:
 
 - Linux distribution and version
 - architecture (`x86_64`, `aarch64`, etc.)
@@ -284,7 +288,7 @@ See [AUTHORS.md](AUTHORS.md) for project attribution and contributor information
 
 ## License
 
-LineWatch is open-source software released under the **MIT License**. See [LICENSE](LICENSE).
+UplinkWitness is open-source software released under the **MIT License**. See [LICENSE](LICENSE).
 
 ## Status
 

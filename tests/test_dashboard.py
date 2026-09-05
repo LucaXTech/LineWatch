@@ -1,4 +1,5 @@
 import unittest
+from pathlib import Path
 
 import dashboard
 
@@ -14,6 +15,14 @@ class DashboardTests(unittest.TestCase):
         self.assertIsNone(dashboard.percentile([], 0.95))
         self.assertEqual(dashboard.percentile([10], 0.95), 10)
         self.assertAlmostEqual(dashboard.percentile([1, 2, 3, 4], 0.5), 2.5)
+
+    def test_uplinkwitness_dashboard_branding(self):
+        template = (Path(__file__).resolve().parents[1] / "templates" / "index.html").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("<title>UplinkWitness</title>", template)
+        self.assertIn("<h1>UplinkWitness</h1>", template)
+        self.assertNotIn("<h1>LineWatch</h1>", template)
 
 
 if __name__ == "__main__":

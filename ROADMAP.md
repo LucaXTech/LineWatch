@@ -1,12 +1,12 @@
-# LineWatch roadmap
+# UplinkWitness roadmap
 
-LineWatch is intentionally developed as a small, dependable Internet-connection black box rather than a general-purpose observability platform.
+UplinkWitness is intentionally developed as a small, dependable Internet-connection black box rather than a general-purpose observability platform.
 
 The roadmap is ordered by reliability and evidence quality first, feature count second.
 
 ## Current baseline — v1.1.x
 
-The current stable baseline provides:
+The current stable baseline, originally released under the LineWatch name, provides:
 
 - vendor-neutral Linux monitoring
 - physical/link carrier detection where Linux exposes it
@@ -48,6 +48,10 @@ This should be completed before adding several router vendors.
 
 Prioritize changes that make an incident easier to explain after the fact, including clearer event context, exports and regression coverage for ambiguous failure cases.
 
+### 4. Complete the brand transition without breaking upgrades
+
+The public project is now **UplinkWitness**. Existing runtime identifiers such as `linewatch.service`, `LINEWATCH_*` environment variables and the historical SQLite filename remain intentionally stable for compatibility. Any future internal-identifier migration should be explicit, documented and backward-compatible rather than bundled into the public rename.
+
 ## Next integrations
 
 After the adapter contract is stable, candidate enhanced integrations include:
@@ -62,11 +66,11 @@ A vendor is only listed as supported after a real implementation has been valida
 
 The automatic installer currently targets `apt` + `systemd` systems. Future portability work may include cleaner manual-install documentation and packaging/service recipes for additional Linux distributions.
 
-Containerization is not automatically considered a win for LineWatch: network namespaces can hide the host link and default-route state that the monitor is specifically trying to observe. Any container deployment must preserve diagnostic fidelity.
+Containerization is not automatically considered a win for UplinkWitness: network namespaces can hide the host link and default-route state that the monitor is specifically trying to observe. Any container deployment must preserve diagnostic fidelity.
 
 ## Non-goals
 
-LineWatch is not trying to become:
+UplinkWitness is not trying to become:
 
 - a hosted SaaS monitoring service
 - a replacement for Prometheus/Grafana or full infrastructure observability
