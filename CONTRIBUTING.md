@@ -1,6 +1,6 @@
-# Contributing to LineWatch
+# Contributing to UplinkWitness
 
-Thanks for helping improve LineWatch.
+Thanks for helping improve UplinkWitness.
 
 The project aims to keep a small, dependable generic Internet-monitoring core while adding deeper router diagnostics through optional adapters.
 
@@ -46,8 +46,10 @@ Please include:
 - router model
 - router firmware, if relevant
 - generic or enhanced mode
-- LineWatch version/commit
+- UplinkWitness version/commit
 - what worked and what failed
+
+Legacy runtime identifiers such as `linewatch.service` and `LINEWATCH_*` remain valid during the rename transition and should not be changed casually in compatibility or upgrade work.
 
 See [docs/TESTING.md](docs/TESTING.md) for the validation checklist.
 
