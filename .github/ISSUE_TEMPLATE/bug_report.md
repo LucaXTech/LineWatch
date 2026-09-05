@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a reproducible LineWatch problem
+about: Report a reproducible UplinkWitness problem
 title: "[Bug] "
 labels: bug
 ---
@@ -17,7 +17,7 @@ Describe the problem and what you expected instead.
 - `LINEWATCH_ROUTER_MODE`:
 - Router model:
 - FRITZ!OS version, if applicable:
-- LineWatch version/commit:
+- UplinkWitness version/commit:
 
 ## Reproduction steps
 
