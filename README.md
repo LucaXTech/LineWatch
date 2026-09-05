@@ -2,16 +2,17 @@
 
 [![CI](https://github.com/LucaXTech/LineWatch/actions/workflows/ci.yml/badge.svg)](https://github.com/LucaXTech/LineWatch/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
-![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-tested-c51a4a)
-![Self-hosted](https://img.shields.io/badge/self--hosted-yes-success)
+![Linux](https://img.shields.io/badge/Linux-self--hosted-success)
+![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-recommended-c51a4a)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-**Self-hosted Internet connection monitor for Raspberry Pi and FRITZ!Box routers.**
+> **Know what actually went down.**
 
-LineWatch turns a Raspberry Pi into a 24/7 **Internet connection monitor**, **network outage monitor** and small diagnostic black box. It continuously checks router reachability, Internet connectivity, latency, DNS and HTTP availability, while reading FRITZ!Box telemetry over TR-064 to distinguish a **router reboot** from a **WAN/PPPoE reset** or a generic ISP outage.
+**LineWatch is a self-hosted Internet connection black box for Linux.** It continuously records gateway reachability, Internet connectivity, latency, DNS, HTTP availability, public-IP changes, outages and downtime.
 
-It is useful when you need objective evidence for intermittent Internet problems: random modem reboots, short disconnections, unstable PPPoE sessions, latency spikes, DNS failures or recurring ISP outages that are difficult to reproduce while support is looking at the line.
+It works as a **generic Linux connection monitor with ordinary routers** and becomes more diagnostic when connected to a **FRITZ!Box**: TR-064 telemetry lets LineWatch distinguish a real router reboot from a WAN/PPPoE session reset or a wider ISP outage.
 
-The project was developed and validated on a **FRITZ!Box 5530 Fiber running FRITZ!OS 8.20**, but the core TR-064 services used by LineWatch (`DeviceInfo` and `WANPPPConnection` / `WANIPConnection`) are common across many FRITZ!Box models.
+A Raspberry Pi is a convenient always-on deployment target, **not a requirement**.
 
 ## Screenshots
 
@@ -25,86 +26,112 @@ The project was developed and validated on a **FRITZ!Box 5530 Fiber running FRIT
   <img src="docs/screenshots/dashboard-mobile.png" alt="LineWatch mobile dashboard" width="360">
 </p>
 
-## Typical use cases
+> The screenshots currently show the FRITZ!Box-enhanced dashboard. In generic mode, FRITZ-specific cards are replaced by gateway and generic connectivity diagnostics.
 
-- monitor an Internet connection 24/7 from a Raspberry Pi
-- detect modem/router reboots automatically
-- record Internet outages and total downtime
-- monitor PPPoE disconnects and WAN-session resets
-- measure home-network and ISP latency over time
-- collect evidence before opening an ISP support ticket
-- keep a self-hosted connection uptime monitor on the local network
-- remotely check connection health through a private VPN such as Tailscale
+## Why LineWatch?
 
-### Italiano
+A normal uptime check can tell you that a target stopped answering. That is useful, but it often does not tell you **which part of a home Internet connection failed**.
 
-LineWatch serve per **monitorare la connessione Internet 24/7 con Raspberry Pi**, rilevare **riavvii del modem**, **disconnessioni Internet**, reset **PPPoE**, problemi DNS/HTTP, latenza e downtime. Con FRITZ!Box usa TR-064 per capire se è realmente ripartito il router oppure se è caduta soltanto la sessione Internet.
+LineWatch combines multiple signals and keeps the evidence locally:
+
+- Linux network-link state when available
+- default-gateway reachability
+- multiple Internet ICMP targets
+- DNS resolution
+- HTTP connectivity
+- public IP changes
+- outage duration and availability
+- optional router/WAN telemetry
+
+This is particularly useful for short or intermittent faults that disappear before ISP support looks at the line.
+
+## Two operating modes
+
+| Capability | Generic Linux | FRITZ!Box enhanced |
+| --- | :---: | :---: |
+| Internet reachability | ✅ | ✅ |
+| DNS / HTTP checks | ✅ | ✅ |
+| Latency history | ✅ | ✅ |
+| Gateway monitoring | ✅ | ✅ |
+| Public IP changes | ✅ | ✅ |
+| Outage / downtime history | ✅ | ✅ |
+| ISP report + CSV export | ✅ | ✅ |
+| Router model / firmware | — | ✅ |
+| Router uptime / reboot detection | — | ✅ |
+| WAN-session uptime | — | ✅ |
+| WAN / PPPoE reset detection | — | ✅ |
+| FRITZ!Box event log around incidents | — | ✅ |
+
+`LINEWATCH_ROUTER_MODE=auto` selects FRITZ!Box enhanced mode when credentials are configured; otherwise it runs generically.
 
 ## What it detects
 
-- FRITZ!Box reboot via router uptime reset
-- WAN / PPPoE session reset without router reboot
-- router unreachable
-- physical Ethernet link down
-- Internet unreachable while the router is reachable
-- DNS failure
-- HTTP connectivity failure
-- WAN IP changes
-- latency trends and packet-level reachability
+### On any supported Linux host
 
-It also stores FRITZ!Box event logs around incidents when available.
+- local network-link loss when exposed by Linux sysfs
+- gateway reachability changes
+- complete Internet loss
+- DNS failures
+- HTTP connectivity failures
+- public IP changes
+- latency trends
+- outage duration, total downtime and observed-period availability
+
+LineWatch does **not** assume that every router or Internet path answers ICMP. In automatic gateway-probe mode, a router that drops ping while DNS/HTTP remain healthy is not incorrectly classified as down.
+
+### With FRITZ!Box telemetry
+
+- FRITZ!Box reboot through router-uptime reset
+- WAN / PPPoE session reset without a router reboot
+- WAN connection state
+- WAN IP and transport details
+- PPPoE access concentrator when exposed
+- FRITZ!Box device logs around incidents when available
 
 ## Dashboard
 
 The responsive local dashboard provides:
 
-- current connection status
-- router and WAN uptime
-- estimated router boot time
-- current latency plus 24 h min / average / P95 / max
-- reboot, WAN reset and outage counters
+- current connection health
+- automatic generic / FRITZ-enhanced presentation
+- latency with 24 h min / average / P95 / max
+- outage counters and downtime statistics
 - observed-period availability
-- downtime and outage duration statistics
 - event timeline
 - Italian / English UI
-- CSV export
+- CSV event export
 - human-readable ISP diagnostic report
 
-The availability percentage is calculated only over the time LineWatch has actually been monitoring, rather than pretending that a new installation already has 30 days of observations.
+Availability is calculated only over the period LineWatch has actually observed. A new installation does not pretend to have 30 days of monitoring history.
 
-## Compatibility
+## Where it can run
 
-### Full functionality
+The monitor is designed for an **always-on Linux host**. Good deployment targets include:
 
-LineWatch is intended for **FRITZ!Box routers with TR-064 enabled** and an account allowed to access FRITZ!Box settings.
+- Raspberry Pi
+- Debian / Ubuntu mini-PC
+- home server
+- Linux VM
+- other ARM or x86 Linux systems with the required networking tools
 
-Tested:
+For meaningful line diagnostics, an **Ethernet-connected always-on machine is recommended**. Wi-Fi can work, but then local wireless problems become part of what LineWatch observes.
+
+The automatic installer currently targets systems with `apt` and `systemd`, including Debian, Ubuntu and Raspberry Pi OS. Other Linux distributions can use the manual setup path once Python, `iproute2` and `ping` are available.
+
+## Compatibility status
+
+The original release was developed and validated on:
 
 - FRITZ!Box 5530 Fiber
 - FRITZ!OS 8.20
 - Raspberry Pi 3
 - Raspberry Pi OS Lite 64-bit
 
-Other FRITZ!Box models should work when they expose the standard `DeviceInfo` service and an active `WANPPPConnection` or `WANIPConnection` service.
-
-### Other modem/router brands
-
-The network probes themselves are generic, but the current release is **not a universal modem monitor**. Reboot detection, WAN-session telemetry and router event logs depend on FRITZ!Box TR-064. Supporting other vendors would require vendor-specific adapters.
-
-## FRITZ!Box setup
-
-In the FRITZ!Box interface:
-
-1. Enable local application access / TR-064 under the local-network settings.
-2. Use a FRITZ!Box user with permission to access FRITZ!Box settings.
-
-**You do not need to create a new user specifically for LineWatch.** An existing account works. A dedicated account is optional if you prefer separate credentials for the monitor.
-
-Remote/Internet access for that FRITZ!Box account is not required.
+Generic Linux support is being expanded conservatively. Compatibility reports from other Linux machines and FRITZ!Box models are especially useful; see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Quick install
 
-Recommended: Raspberry Pi OS Lite, connected to the FRITZ!Box by **Ethernet**.
+Recommended: an always-on Debian/Ubuntu/Raspberry Pi OS machine connected by Ethernet.
 
 ```bash
 git clone https://github.com/LucaXTech/LineWatch.git
@@ -113,33 +140,70 @@ chmod +x install.sh
 ./install.sh
 ```
 
-The installer asks for the existing FRITZ!Box username and password, creates a private `.env`, installs the Python environment and registers both systemd services.
+The installer asks whether you want FRITZ!Box enhanced diagnostics.
 
-Then open:
+### Generic mode
+
+Choose **No** when asked about FRITZ!Box integration. No router credentials are required.
+
+LineWatch will monitor the Linux default gateway and external connectivity probes.
+
+### FRITZ!Box enhanced mode
+
+Choose **Yes** and provide a FRITZ!Box account allowed to access router settings through TR-064.
+
+A dedicated account is optional. Remote/Internet access for that account is not required.
+
+After installation, open:
 
 ```text
 http://linewatch.local:8080
 ```
 
-If mDNS is unavailable, use the Raspberry Pi's LAN IP with port `8080`.
+If mDNS is unavailable, use the Linux host's LAN IP with port `8080`.
 
 ## Manual configuration
-
-Copy:
 
 ```bash
 cp .env.example .env
 chmod 600 .env
 ```
 
-At minimum set:
+The most relevant options are:
 
 ```text
-FRITZ_USER=your-user
-FRITZ_PASSWORD=your-password
+LINEWATCH_ROUTER_MODE=auto
+LINEWATCH_INTERFACE=
+LINEWATCH_GATEWAY_PROBE=auto
+
+FRITZ_USER=
+FRITZ_PASSWORD=
+FRITZ_HOST=
 ```
 
-`FRITZ_HOST` may be left empty: LineWatch uses the default IPv4 gateway automatically.
+### Router modes
+
+`auto`
+: Use FRITZ!Box telemetry when credentials are present; otherwise generic mode.
+
+`generic`
+: Never use router-specific telemetry.
+
+`fritz`
+: Require FRITZ!Box credentials and enable TR-064 diagnostics.
+
+### Gateway probe modes
+
+`auto`
+: Learn whether the gateway responds to ICMP. If Internet/DNS/HTTP work while gateway ping does not, gateway ICMP is excluded from outage classification.
+
+`on`
+: Always use gateway ICMP for incident classification.
+
+`off`
+: Never use gateway ICMP to classify an outage.
+
+Leaving `LINEWATCH_INTERFACE` empty lets LineWatch detect the interface associated with the Linux IPv4 default route.
 
 ## Services
 
@@ -156,48 +220,77 @@ journalctl -u linewatch -f
 
 ## Remote access
 
-The dashboard deliberately has no public-Internet authentication layer. Do **not** expose port 8080 with router port forwarding.
+The dashboard deliberately has no public-Internet authentication layer. **Do not expose port 8080 with router port forwarding.**
 
-For private remote access, a mesh VPN such as Tailscale is a good fit:
-
-```bash
-curl -fsSL https://tailscale.com/install.sh | sh
-sudo tailscale up
-tailscale ip -4
-```
-
-Then open `http://<tailscale-ip>:8080` from another device in the same tailnet.
+For private remote access, use a VPN or mesh VPN such as Tailscale.
 
 ## Data and privacy
 
-Runtime data stays on the Raspberry Pi:
+Runtime data stays on the machine running LineWatch:
 
 - `data/linewatch.sqlite3` — SQLite database
-- `data/events/` — incident bundles and FRITZ!Box logs
+- `data/events/` — incident bundles and optional FRITZ!Box logs
 
-The repository ignores `.env`, runtime databases and logs. Do not commit real router credentials, event logs, WAN/public IP addresses or personal network data.
+The repository ignores `.env`, runtime databases and logs. Do not commit real router credentials, event logs, public IP addresses or personal network data.
 
 ## Architecture
 
 ```text
-FRITZ!Box
-   │
-   ├── Ethernet carrier / gateway ping
-   ├── TR-064: uptime, WAN state, WAN IP, device log
-   │
-Raspberry Pi ── Internet probes
-   │             ├── ICMP
-   │             ├── DNS
-   │             └── HTTP connectivity
-   │
-   ├── SQLite event store
-   └── Web dashboard :8080
+                     LineWatch Core
+                          │
+         ┌────────────────┼────────────────┐
+         │                │                │
+   Linux / gateway    Internet probes   Router adapter
+         │            ICMP · DNS · HTTP       │
+         │                │                   └── FRITZ!Box / TR-064
+         │                │
+         └────────────────┴───────────────┐
+                                          │
+                                  Incident classifier
+                                          │
+                              SQLite + event bundles
+                                          │
+                               Web dashboard :8080
 ```
 
-## Notes
+The router integration boundary is intentionally narrow so additional router adapters can be added in the future without replacing the generic monitoring core.
 
-Some FRITZ!Box models expose additional vendor-specific TR-064 services. For example, the tested 5530 Fiber exposes `X_AVM-DE_WANFiber`, but on the tested firmware its optical values were not populated. LineWatch therefore does not rely on those values for incident classification.
+Potential future integrations include OpenWrt, MikroTik, UniFi and standards-based telemetry where reliable interfaces exist. They are **not currently advertised as supported**.
+
+## Development
+
+CI currently checks Python 3.11 and 3.13, compiles the monitor/dashboard, runs unit tests and validates the shell scripts.
+
+Run tests locally with:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+## Contributing
+
+Bug reports, Linux compatibility results, FRITZ!Box model reports, tests and router-adapter contributions are welcome.
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+
+If you test LineWatch on different hardware, include:
+
+- Linux distribution and version
+- architecture (`x86_64`, `aarch64`, etc.)
+- wired or wireless connection
+- router model
+- whether generic or FRITZ-enhanced mode was used
+
+## Author
+
+Created and maintained by **Luca Serioli** ([@LucaXTech](https://github.com/LucaXTech)).
+
+See [AUTHORS.md](AUTHORS.md) for project attribution and contributor information.
+
+## License
+
+LineWatch is open-source software released under the **MIT License**. See [LICENSE](LICENSE).
 
 ## Status
 
-Early public release. The monitor is already useful for long-running home/ISP diagnostics, but more FRITZ!Box models should be validated before claiming universal FRITZ!Box compatibility.
+Active early-stage open-source project. The goal is to keep the generic monitoring core small and dependable while adding deeper router diagnostics through optional adapters.

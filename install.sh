@@ -9,6 +9,12 @@ fi
 APP_DIR="$(cd "$(dirname "$0")" && pwd)"
 USER_NAME="$(id -un)"
 
+if ! command -v apt-get >/dev/null 2>&1; then
+  echo "Automatic installation currently supports Debian/Ubuntu/Raspberry Pi OS systems with apt."
+  echo "For other Linux distributions, install Python 3, venv, iproute2 and ping manually, then use the manual setup instructions."
+  exit 1
+fi
+
 sudo apt-get update
 sudo apt-get install -y python3-venv iproute2 iputils-ping
 
@@ -24,13 +30,13 @@ if [ ! -f "$APP_DIR/.env" ]; then
   else
     cp "$APP_DIR/.env.example" "$APP_DIR/.env"
     chmod 600 "$APP_DIR/.env"
-    echo "Created .env from .env.example; configure it before starting LineWatch."
+    echo "Created .env from .env.example. LineWatch will start in generic mode unless FRITZ credentials are added."
   fi
 fi
 
 sudo tee /etc/systemd/system/linewatch.service >/dev/null <<EOF
 [Unit]
-Description=LineWatch FRITZ!Box connection monitor
+Description=LineWatch Internet connection monitor
 Wants=network-online.target
 After=network-online.target
 
@@ -66,14 +72,9 @@ EOF
 
 sudo systemctl daemon-reload
 sudo systemctl enable linewatch.service linewatch-dashboard.service
+sudo systemctl restart linewatch linewatch-dashboard
 
-if grep -q '^FRITZ_USER=$' "$APP_DIR/.env" 2>/dev/null; then
-  echo
-  echo "Configure .env, then run:"
-  echo "  sudo systemctl start linewatch linewatch-dashboard"
-else
-  sudo systemctl restart linewatch linewatch-dashboard
-  echo
-  echo "LineWatch is running."
-  echo "Open: http://$(hostname).local:8080"
-fi
+echo
+echo "LineWatch is running."
+echo "Open: http://$(hostname).local:8080"
+echo "If mDNS is unavailable, use this machine's LAN IP with port 8080."
