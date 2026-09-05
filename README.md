@@ -1,18 +1,18 @@
 # LineWatch
 
 [![CI](https://github.com/LucaXTech/LineWatch/actions/workflows/ci.yml/badge.svg)](https://github.com/LucaXTech/LineWatch/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/LucaXTech/LineWatch)](https://github.com/LucaXTech/LineWatch/releases/latest)
 ![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
 ![Linux](https://img.shields.io/badge/Linux-self--hosted-success)
-![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-recommended-c51a4a)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 > **Know what actually went down.**
 
-**LineWatch is a self-hosted Internet connection black box for Linux.** It continuously records gateway reachability, Internet connectivity, latency, DNS, HTTP availability, public-IP changes, outages and downtime.
+**LineWatch is a self-hosted Internet connection black box for Linux.** Most uptime monitors tell you that something stopped answering; LineWatch tries to preserve enough local evidence to tell you **where the failure was**: local link, gateway, upstream Internet, DNS, HTTP, or — with optional router telemetry — the router/WAN session itself.
 
-It works as a **generic Linux connection monitor with ordinary routers** and becomes more diagnostic when connected to a **FRITZ!Box**: TR-064 telemetry lets LineWatch distinguish a real router reboot from a WAN/PPPoE session reset or a wider ISP outage.
+It works with ordinary routers in **generic Linux mode** and becomes more diagnostic with a **FRITZ!Box** through TR-064. A Raspberry Pi is a convenient always-on deployment target, **not a requirement**.
 
-A Raspberry Pi is a convenient always-on deployment target, **not a requirement**.
+**Current stable release:** [v1.1.0](https://github.com/LucaXTech/LineWatch/releases/tag/v1.1.0) · [Quick install](#quick-install) · [Compatibility](docs/COMPATIBILITY.md) · [Roadmap](ROADMAP.md) · [Contributing](CONTRIBUTING.md)
 
 ## Screenshots
 
@@ -120,14 +120,9 @@ The automatic installer currently targets systems with `apt` and `systemd`, incl
 
 ## Compatibility status
 
-The original release was developed and validated on:
+v1.1.0 has been validated on a physical ARM64 Raspberry Pi running Debian 13, including a controlled Ethernet disconnect/recovery test in generic mode. FRITZ!Box enhanced mode has been validated with a FRITZ!Box 5530 Fiber on FRITZ!OS 8.20 and PPPoE. WSL2/Ubuntu on x86_64 is also used for generic/install regression testing.
 
-- FRITZ!Box 5530 Fiber
-- FRITZ!OS 8.20
-- Raspberry Pi 3
-- Raspberry Pi OS Lite 64-bit
-
-Generic Linux support is being expanded conservatively. Compatibility reports from other Linux machines and FRITZ!Box models are especially useful; see [CONTRIBUTING.md](CONTRIBUTING.md).
+See [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md) for the current matrix and [docs/TESTING.md](docs/TESTING.md) for the validation checklist. Compatibility reports from other Linux machines and router models are especially useful.
 
 ## Quick install
 
@@ -271,7 +266,7 @@ python -m unittest discover -s tests -v
 
 Bug reports, Linux compatibility results, FRITZ!Box model reports, tests and router-adapter contributions are welcome.
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. The current development priorities are tracked in [ROADMAP.md](ROADMAP.md).
 
 If you test LineWatch on different hardware, include:
 
