@@ -1,6 +1,6 @@
 # Security
 
-LineWatch is designed to run on a trusted local network.
+UplinkWitness is designed to run on a trusted local network.
 
 ## Dashboard exposure
 
