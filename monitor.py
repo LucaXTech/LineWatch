@@ -229,11 +229,11 @@ def add_event(conn, kind, details, start=None, end=None, duration=None):
     return cur.lastrowid
 
 
-def close_event(conn, event_id, details, duration):
+def close_event(conn, event_id, details, duration, end=None):
     conn.execute(
         "UPDATE events SET end_ts=?,duration_s=?,details_json=? WHERE id=?",
         (
-            now(),
+            end or now(),
             round(duration, 2),
             json.dumps(details, ensure_ascii=False),
             event_id,
@@ -536,16 +536,16 @@ def main():
         unhealthy = kind != "OK"
         if unhealthy and open_event is None:
             open_kind = kind
-            open_started = mono
+            open_started = cycle
             open_details = {"start_state": asdict(sample)}
             open_event = add_event(conn, kind, open_details, start=ts)
             bundle(open_event, history, last_log, open_details)
         elif not unhealthy and open_event is not None:
-            duration = mono - open_started
+            duration = cycle - open_started
             open_details.update(
                 end_state=asdict(sample), duration_s=round(duration, 2)
             )
-            close_event(conn, open_event, open_details, duration)
+            close_event(conn, open_event, open_details, duration, end=ts)
             bundle(open_event, history, last_log, open_details)
             open_event = open_kind = open_started = None
             open_details = {}

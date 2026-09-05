@@ -1,4 +1,5 @@
 import unittest
+import sqlite3
 from unittest.mock import patch
 
 import monitor
@@ -114,6 +115,47 @@ class MonitorTests(unittest.TestCase):
     )
     def test_default_route_detects_gateway_and_interface(self, _):
         self.assertEqual(monitor.default_route(), ("192.168.178.1", "enp3s0"))
+
+    def test_close_event_uses_explicit_end_timestamp(self):
+        conn = sqlite3.connect(":memory:")
+        conn.execute("""
+            CREATE TABLE events(
+                id INTEGER PRIMARY KEY,
+                start_ts TEXT,
+                end_ts TEXT,
+                duration_s REAL,
+                event_type TEXT,
+                details_json TEXT
+            )
+        """)
+
+        start = "2026-09-05T18:00:00+02:00"
+        end = "2026-09-05T18:00:15+02:00"
+
+        event_id = monitor.add_event(
+            conn,
+            "NETWORK_LINK_DOWN",
+            {},
+            start=start,
+        )
+
+        monitor.close_event(
+            conn,
+            event_id,
+            {"duration_s": 15.0},
+            15.0,
+            end=end,
+        )
+
+        row = conn.execute(
+            "SELECT start_ts, end_ts, duration_s FROM events WHERE id=?",
+            (event_id,),
+        ).fetchone()
+
+        self.assertEqual(row[0], start)
+        self.assertEqual(row[1], end)
+        self.assertEqual(row[2], 15.0)
+        conn.close()
 
 
 if __name__ == "__main__":
