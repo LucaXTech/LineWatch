@@ -30,13 +30,15 @@ if [ ! -f "$APP_DIR/.env" ]; then
   else
     cp "$APP_DIR/.env.example" "$APP_DIR/.env"
     chmod 600 "$APP_DIR/.env"
-    echo "Created .env from .env.example. LineWatch will start in generic mode unless FRITZ credentials are added."
+    echo "Created .env from .env.example. UplinkWitness will start in generic mode unless FRITZ credentials are added."
   fi
 fi
 
+# Service identifiers intentionally retain the original linewatch names so
+# existing installations can upgrade without replacing units or data paths.
 sudo tee /etc/systemd/system/linewatch.service >/dev/null <<EOF
 [Unit]
-Description=LineWatch Internet connection monitor
+Description=UplinkWitness Internet connection monitor
 Wants=network-online.target
 After=network-online.target
 
@@ -54,7 +56,7 @@ EOF
 
 sudo tee /etc/systemd/system/linewatch-dashboard.service >/dev/null <<EOF
 [Unit]
-Description=LineWatch web dashboard
+Description=UplinkWitness web dashboard
 After=network-online.target linewatch.service
 Wants=network-online.target
 
@@ -75,6 +77,6 @@ sudo systemctl enable linewatch.service linewatch-dashboard.service
 sudo systemctl restart linewatch linewatch-dashboard
 
 echo
-echo "LineWatch is running."
+echo "UplinkWitness is running."
 echo "Open: http://$(hostname).local:8080"
 echo "If mDNS is unavailable, use this machine's LAN IP with port 8080."
