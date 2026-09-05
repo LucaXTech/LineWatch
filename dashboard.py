@@ -464,8 +464,8 @@ def export_isp():
     generated = datetime.now().astimezone().isoformat(timespec="seconds")
     if lang == "en":
         lines = [
-            "LINEWATCH - ISP CONNECTION DIAGNOSTIC REPORT",
-            "=" * 44,
+            "UPLINKWITNESS - ISP CONNECTION DIAGNOSTIC REPORT",
+            "=" * 48,
             f"Period analysed: last {days} days",
             f"Generated: {generated}",
             "",
@@ -497,12 +497,12 @@ def export_isp():
             f"Total recorded downtime: {fmt_duration(downtime)}",
             "",
             "EVENT TIMELINE",
-            "-" * 44,
+            "-" * 48,
         ]
     else:
         lines = [
-            "LINEWATCH - REPORT DIAGNOSTICO CONNESSIONE / ISP",
-            "=" * 42,
+            "UPLINKWITNESS - REPORT DIAGNOSTICO CONNESSIONE / ISP",
+            "=" * 46,
             f"Periodo analizzato: ultimi {days} giorni",
             f"Generato: {generated}",
             "",
@@ -534,7 +534,7 @@ def export_isp():
             f"Downtime totale registrato: {fmt_duration(downtime)}",
             "",
             "CRONOLOGIA EVENTI",
-            "-" * 42,
+            "-" * 46,
         ]
 
     if not rows:
