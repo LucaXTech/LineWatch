@@ -1,6 +1,6 @@
 # Linux validation checklist
 
-Use this checklist before claiming a Linux distribution or device class as tested.
+Use this checklist before claiming a Linux distribution or device class as tested with UplinkWitness.
 
 ## Fresh install
 
@@ -14,6 +14,8 @@ systemctl status linewatch
 systemctl status linewatch-dashboard
 journalctl -u linewatch -n 100 --no-pager
 ```
+
+The `linewatch` service names are intentionally retained as stable runtime identifiers during the UplinkWitness rename.
 
 ## Generic mode
 
@@ -29,7 +31,7 @@ Configure `LINEWATCH_ROUTER_MODE=generic` and verify:
 
 ## Gateway ICMP behavior
 
-If the gateway answers ping, verify LineWatch logs that gateway ICMP is supported.
+If the gateway answers ping, verify UplinkWitness logs that gateway ICMP is supported.
 
 If the gateway does not answer ping while Internet access works, verify automatic mode disables gateway-based outage classification instead of reporting a false outage.
 
@@ -63,4 +65,4 @@ Reboot the Linux host and verify the monitor/dashboard return automatically and 
 
 Export both CSV and ISP text reports. Check that generic mode does not invent FRITZ-specific telemetry and enhanced mode includes it when available.
 
-When opening a compatibility issue, include distribution/version, architecture, network interface type, router model, LineWatch commit/version, and which checklist sections passed.
+When opening a compatibility issue, include distribution/version, architecture, network interface type, router model, UplinkWitness commit/version, and which checklist sections passed.
