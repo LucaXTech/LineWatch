@@ -12,9 +12,9 @@
 
 It works with ordinary routers in **generic Linux mode** and becomes more diagnostic with a **FRITZ!Box** through TR-064. A Raspberry Pi is a convenient always-on deployment target, **not a requirement**.
 
-**Current stable release:** [v1.1.0](https://github.com/LucaXTech/UplinkWitness/releases/tag/v1.1.0) · [Quick install](#quick-install) · [Compatibility](docs/COMPATIBILITY.md) · [Roadmap](ROADMAP.md) · [Contributing](CONTRIBUTING.md)
+**Latest release:** [GitHub Releases](https://github.com/LucaXTech/UplinkWitness/releases/latest) · [Quick install](#quick-install) · [Compatibility](docs/COMPATIBILITY.md) · [Roadmap](ROADMAP.md) · [Contributing](CONTRIBUTING.md) · [Rename notes](docs/RENAMING.md)
 
-> **Project rename:** releases through v1.1.0 were published as **LineWatch**. The public project is now **UplinkWitness**. Existing runtime identifiers such as `linewatch.service`, `LINEWATCH_*` environment variables and `data/linewatch.sqlite3` are intentionally retained for upgrade compatibility.
+> **Project rename:** releases through v1.1.0 were published as **LineWatch**. The public project is now **UplinkWitness**. Existing runtime identifiers such as `linewatch.service`, `LINEWATCH_*` environment variables and `data/linewatch.sqlite3` are intentionally retained for upgrade compatibility. See [docs/RENAMING.md](docs/RENAMING.md).
 
 ## Screenshots
 
